@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import LoginLink from "./LoginLink";
+import LogoutLink from "./LogoutLink";
 
 class Header extends Component {
   constructor(props) {
@@ -22,18 +24,29 @@ class Header extends Component {
   }
 
   render() {
+    const isLogin = this.props.isLogin;
+    let loginTag = "";
+    if(isLogin === 0){
+      loginTag = <LoginLink />;
+    }
+    else{
+      loginTag = <LogoutLink onLogoutSuccess={this.props.onLogoutSuccess} />;
+    }
     return (
       <div className="container-fluid">
         <div className="row">
           <div className="col-md-8 text-left">
-            <h1 className="text-success">
+            <h1 className="text-success mt-2">
               <img style={{ height: 70 }} src="/images/logo/logo.png" alt="" />{" "}
-              เฮลตี้ คาเฟ่{" "}
+              โยคะบ้านปัญญา{" "}
             </h1>
           </div>
           <div className="col-md-4 text-right">
-            <h5 className="text-muted mt-4">
-              {this.state.date.toLocaleTimeString()}
+            <h5 className="text-muted mt-3">
+              {this.state.date.toLocaleTimeString()}{" "}
+            </h5>
+            <h5 className="text-muted">
+              {loginTag}
             </h5>
           </div>
         </div>
